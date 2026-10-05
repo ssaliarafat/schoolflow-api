@@ -16,12 +16,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/students', require('./routes/students'));
 app.use('/teachers', require('./routes/teachers'));
 
-app.get('/', (req, res) => {
-    res.json({
-        message: 'Welcome to SchoolFlow API'
-    });
-});
-
 const port = process.env.PORT || 8080;
 
 initDb()
