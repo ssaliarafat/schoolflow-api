@@ -1,0 +1,36 @@
+### Get all teachers
+GET http://localhost:8080/teachers
+
+
+### Create a new teacher
+POST http://localhost:8080/teachers
+Content-Type: application/json
+
+{
+  "firstName": "Sarah",
+  "lastName": "Nabirye",
+  "teacherId": "TCH001",
+  "email": "sarah@example.com",
+  "phone": "0700111222",
+  "subject": "Mathematics",
+  "classId": "CLASS001",
+  "hireDate": "2025-01-10"
+}
+
+
+### Get one teacher
+GET http://localhost:8080/teachers/6ac37b7a6e57cd8d00e3ec9a
+
+
+### Update a teacher
+PUT http://localhost:8080/teachers/6ac37b7a6e57cd8d00e3ec9a
+Content-Type: application/json
+
+{
+  "phone": "0700999888",
+  "subject": "Advanced Mathematics"
+}
+
+
+### Delete a teacher
+DELETE http://localhost:8080/teachers/YOUR_TEACHER_ID

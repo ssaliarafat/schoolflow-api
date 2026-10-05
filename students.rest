@@ -1,0 +1,37 @@
+### Get all students
+GET http://localhost:8080/students
+
+
+### Get one student
+GET http://localhost:8080/students/YOUR_STUDENT_ID
+
+
+### Create a new student
+POST http://localhost:8080/students
+Content-Type: application/json
+
+{
+  "firstName": "Marvel",
+  "lastName": "gemini",
+  "studentId": "STU001",
+  "email": "marvel@example.com",
+  "dateOfBirth": "2004-05-15",
+  "gender": "Male",
+  "classId": "CLASS001",
+  "phone": "0700000000",
+  "enrollmentDate": "2026-01-16"
+}
+
+
+### Update a student
+PUT http://localhost:8080/students/YOUR_STUDENT_ID
+Content-Type: application/json
+
+{
+  "phone": "0711111111",
+  "classId": "CLASS002"
+}
+
+
+### Delete a student
+DELETE http://localhost:8080/students/YOUR_STUDENT_ID
