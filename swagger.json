@@ -5,10 +5,10 @@
     "description": "RESTful API for managing school students and teachers",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "schoolflow-api-9lcs.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/": {

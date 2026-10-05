@@ -6,8 +6,8 @@ const doc = {
         description: 'RESTful API for managing school students and teachers',
         version: '1.0.0'
     },
-    host: 'localhost:8080',
-    schemes: ['http']
+    host: 'schoolflow-api-9lcs.onrender.com',
+    schemes: ['https']
 };
 
 const outputFile = './swagger.json';
