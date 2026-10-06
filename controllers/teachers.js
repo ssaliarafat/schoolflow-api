@@ -80,18 +80,12 @@ const createTeacher = async (req, res) => {
 const updateTeacher = async (req, res) => {
     try {
         if (!ObjectId.isValid(req.params.id)) {
-            return res.status(400).json({ error: 'Invalid teacher ID.' });
-        }
-
-        if (!req.body || Object.keys(req.body).length === 0) {
             return res.status(400).json({
-                error: 'At least one field is required to update the teacher.'
+                error: 'Invalid teacher ID.'
             });
         }
 
-        const db = getDb();
-
-        const updates = {
+        const teacher = {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             teacherId: req.body.teacherId,
@@ -102,27 +96,26 @@ const updateTeacher = async (req, res) => {
             hireDate: req.body.hireDate
         };
 
-        Object.keys(updates).forEach(
-            key => updates[key] === undefined && delete updates[key]
-        );
-
-        const result = await db.collection('teachers').updateOne(
+        const result = await getDb().collection('teachers').replaceOne(
             { _id: new ObjectId(req.params.id) },
-            { $set: updates }
+            teacher
         );
 
         if (result.matchedCount === 0) {
-            return res.status(404).json({ error: 'Teacher not found.' });
+            return res.status(404).json({
+                error: 'Teacher not found.'
+            });
         }
 
         res.status(200).json({
             message: 'Teacher updated successfully.'
         });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to update teacher.' });
+        res.status(500).json({
+            error: 'Failed to update teacher.'
+        });
     }
 };
-
 const deleteTeacher = async (req, res) => {
     try {
         if (!ObjectId.isValid(req.params.id)) {

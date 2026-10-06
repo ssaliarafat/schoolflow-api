@@ -82,18 +82,12 @@ const createStudent = async (req, res) => {
 const updateStudent = async (req, res) => {
     try {
         if (!ObjectId.isValid(req.params.id)) {
-            return res.status(400).json({ error: 'Invalid student ID.' });
-        }
-
-        if (!req.body || Object.keys(req.body).length === 0) {
             return res.status(400).json({
-                error: 'At least one field is required to update the student.'
+                error: 'Invalid student ID.'
             });
         }
 
-        const db = getDb();
-
-        const updates = {
+        const student = {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             studentId: req.body.studentId,
@@ -105,27 +99,26 @@ const updateStudent = async (req, res) => {
             enrollmentDate: req.body.enrollmentDate
         };
 
-        Object.keys(updates).forEach(
-            key => updates[key] === undefined && delete updates[key]
-        );
-
-        const result = await db.collection('students').updateOne(
+        const result = await getDb().collection('students').replaceOne(
             { _id: new ObjectId(req.params.id) },
-            { $set: updates }
+            student
         );
 
         if (result.matchedCount === 0) {
-            return res.status(404).json({ error: 'Student not found.' });
+            return res.status(404).json({
+                error: 'Student not found.'
+            });
         }
 
         res.status(200).json({
             message: 'Student updated successfully.'
         });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to update student.' });
+        res.status(500).json({
+            error: 'Failed to update student.'
+        });
     }
 };
-
 const deleteStudent = async (req, res) => {
     try {
         if (!ObjectId.isValid(req.params.id)) {

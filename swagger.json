@@ -110,6 +110,42 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "example": "any"
+                },
+                "lastName": {
+                  "example": "any"
+                },
+                "studentId": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "dateOfBirth": {
+                  "example": "any"
+                },
+                "gender": {
+                  "example": "any"
+                },
+                "classId": {
+                  "example": "any"
+                },
+                "phone": {
+                  "example": "any"
+                },
+                "enrollmentDate": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -249,6 +285,39 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "example": "any"
+                },
+                "lastName": {
+                  "example": "any"
+                },
+                "teacherId": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "phone": {
+                  "example": "any"
+                },
+                "subject": {
+                  "example": "any"
+                },
+                "classId": {
+                  "example": "any"
+                },
+                "hireDate": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
