@@ -91,9 +91,20 @@ const updateTeacher = async (req, res) => {
 
         const db = getDb();
 
-        const updates = { ...req.body };
+        const updates = {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            teacherId: req.body.teacherId,
+            email: req.body.email,
+            phone: req.body.phone,
+            subject: req.body.subject,
+            classId: req.body.classId,
+            hireDate: req.body.hireDate
+        };
 
-        delete updates._id;
+        Object.keys(updates).forEach(
+            key => updates[key] === undefined && delete updates[key]
+        );
 
         const result = await db.collection('teachers').updateOne(
             { _id: new ObjectId(req.params.id) },
