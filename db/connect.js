@@ -21,4 +21,9 @@ const initDb = async () => {
 
 const getDb = () => database;
 
-module.exports = { initDb, getDb };
+const closeDb = async () => {
+    await client.close();
+    database = undefined;
+};
+
+module.exports = { initDb, getDb, closeDb };

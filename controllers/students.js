@@ -1,6 +1,47 @@
 const { getDb } = require('../db/connect');
 const { ObjectId } = require('mongodb');
 
+const isValidStudent = (student) => {
+    const requiredFields = [
+        'firstName',
+        'lastName',
+        'studentId',
+        'email'
+    ];
+
+    for (const field of requiredFields) {
+        if (
+            typeof student[field] !== 'string' ||
+            !student[field].trim()
+        ) {
+            return false;
+        }
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(student.email)) {
+        return false;
+    }
+
+    const optionalFields = [
+        'dateOfBirth',
+        'gender',
+        'classId',
+        'phone',
+        'enrollmentDate'
+    ];
+
+    for (const field of optionalFields) {
+        if (
+            student[field] !== undefined &&
+            typeof student[field] !== 'string'
+        ) {
+            return false;
+        }
+    }
+
+    return true;
+};
+
 const getAllStudents = async (req, res) => {
     try {
         const db = getDb();
@@ -48,9 +89,9 @@ const createStudent = async (req, res) => {
             enrollmentDate
         } = req.body;
 
-        if (!firstName || !lastName || !studentId || !email) {
+        if (!isValidStudent(req.body)) {
             return res.status(400).json({
-                error: 'firstName, lastName, studentId, and email are required.'
+                error: 'Valid firstName, lastName, studentId, and email are required. Optional fields must be strings.'
             });
         }
 
@@ -84,6 +125,11 @@ const updateStudent = async (req, res) => {
         if (!ObjectId.isValid(req.params.id)) {
             return res.status(400).json({
                 error: 'Invalid student ID.'
+            });
+        }
+        if (!isValidStudent(req.body)) {
+            return res.status(400).json({
+                error: 'Valid firstName, lastName, studentId, and email are required. Optional fields must be strings.'
             });
         }
 
