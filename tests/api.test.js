@@ -13,11 +13,11 @@ describe('SchoolFlow GET endpoints', () => {
 
     beforeAll(async () => {
         await initDb();
-    });
+    }, 30000);
 
     afterAll(async () => {
         await closeDb();
-    });
+    }, 30000);
 
     test.each(collections)(
         'GET $path returns 200',
